@@ -4,7 +4,7 @@
 
 As you already know meteor login system is based on login tokens.
 Each login token have it's own expiry time, until then it will stay active.
-As long as the expiry time won't expire, the user will be automatically logged in.
+As long as the time won't expire, the user will be automatically logged in.
 
 What if we want to have a remember me functionality in the application then?
 We can track the stored setting on the user and logout him manually when we wish for.
@@ -35,7 +35,7 @@ To activate the functionality:
 1. Import the package on server side:
 
 ```
-import RememberMe from 'tprzytula:remember-me';
+import RememberMe from 'meteor/tprzytula:remember-me';
 ```
 
 2. Activate the functionality:
@@ -47,7 +47,7 @@ RememberMe.activate()
 3. Import the package on client side:
 
 ```
-import RememberMe from 'tprzytula:remember-me';
+import RememberMe from 'meteor/tprzytula:remember-me';
 ```
 
 4. Change your login method to this:
@@ -70,7 +70,7 @@ RememberMe.loginWithPassword(username, password, true)
 
 Wrapper for a Meteor.loginWithPassword with an addition of rememberMe as a last parameter.
 
-The default for rememberMe is true to match the default behaviour of Meteor.
+The default for rememberMe is true to match the behaviour of Meteor.
 
 
 ## TODO:
