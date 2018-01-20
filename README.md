@@ -26,7 +26,7 @@ active for your phone!.
 
 ## Installation
 
-`meteor npm install tprzytula:remember-me`
+`meteor add tprzytula:remember-me`
 
 ## Usage
 
