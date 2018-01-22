@@ -1,16 +1,24 @@
+import { Accounts } from 'meteor/accounts-base';
 import overrideAccountsLogin from './overrideLogin';
 
 const RememberMe = {};
-console.log('first', Package['accounts-base']);
-console.log('second', Package['accounts-base-two']);
 
 const updateRememberMe = 'tprzytula:rememberMe-update';
 RememberMe.loginWithPassword = (user, password, callback = () => {}, rememberMe = true) => {
+    let flag = rememberMe;
+    let callbackMethod = () => {};
+
+    if (typeof callback === 'boolean') {
+        flag = callback;
+    } else {
+        callbackMethod = callback;
+    }
+
     Meteor.loginWithPassword(user, password, (error) => {
         if (!error) {
-            Meteor.call(updateRememberMe, rememberMe);
+            Meteor.call(updateRememberMe, flag);
         }
-        callback(error);
+        callbackMethod(error);
     });
 };
 
