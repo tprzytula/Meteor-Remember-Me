@@ -72,7 +72,7 @@ Wrapper for a Meteor.loginWithPassword with an addition of rememberMe as a last 
 
 The default for rememberMe is true to match the behaviour of Meteor.
 
+## Testing
 
-## TODO:
-- support multi server accounts
-- tests
+You can test this dependency by running:
+`npm run test`

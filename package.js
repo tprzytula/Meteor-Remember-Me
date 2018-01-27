@@ -1,6 +1,6 @@
 Package.describe({
     name: 'tprzytula:remember-me',
-    version: '0.1.0',
+    version: '0.1.1',
     summary: 'Extension for Meteor account-base package with the implementation of rememberMe',
     git: 'https://github.com/tprzytulacc/Meteor-RememberMe',
     documentation: 'README.md'
@@ -10,8 +10,20 @@ Package.onUse((api) => {
     api.versionsFrom('1.5.2.2');
     api.use('ecmascript');
     api.use('accounts-base');
+    api.use('accounts-password');
     api.mainModule('client/index.js', 'client');
     api.mainModule('server/index.js', 'server');
+});
+
+Package.onTest((api) => {
+    api.use('ecmascript');
+    api.use('accounts-base');
+    api.use('accounts-password');
+    api.use('coffeescript');
+    api.use('meteortesting:mocha');
+    api.use('tprzytula:remember-me');
+    api.use('practicalmeteor:chai');
+    api.mainModule('test/server/index.js', 'server');
 });
 
 Npm.depends({

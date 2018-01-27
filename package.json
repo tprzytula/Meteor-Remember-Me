@@ -1,18 +1,21 @@
 {
-    "name": "tprzytula:remember-me",
-    "version": "0.1.0",
-    "description": "Extension for Meteor account-base package with the implementation of rememberMe",
-    "license": "MIT",
-    "author": "Tomasz Przytuła <t.przytula.dev@gmail.com>",
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/tprzytulacc/Meteor-Remember-Me"
-    },
-    "keywords": [
-        "meteor",
-        "rememberme",
-        "autologin",
-        "login"
-    ],
-    "homepage": "https://github.com/tprzytulacc/Meteor-Remember-Me"
+  "name": "rememberMe",
+  "version": "0.1.1",
+  "description": "Extension for Meteor account-base package with the implementation of rememberMe",
+  "license": "MIT",
+  "author": "Tomasz Przytuła <t.przytula.dev@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tprzytulacc/Meteor-Remember-Me"
+  },
+  "keywords": [
+    "meteor",
+    "rememberme",
+    "autologin",
+    "login"
+  ],
+  "homepage": "https://github.com/tprzytulacc/Meteor-Remember-Me",
+  "scripts": {
+    "test": "meteor test-packages ./ --driver-package meteortesting:mocha"
+  }
 }
