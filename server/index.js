@@ -14,8 +14,10 @@ export const activate = () => {
     methods();
     Accounts.validateLoginAttempt((attempt) => {
         const authenticator = new Authenticator(attempt);
-        const { result, resultCode, reason } = authenticator.validateAttempt();
-        if (!result) {
+        const { result, resultCode, reason, error } = authenticator.validateAttempt();
+        if (error) {
+            throw error;
+        } else if (!result) {
             throw new Meteor.Error(resultCode, reason);
         }
         return true;
@@ -32,6 +34,9 @@ export const activate = () => {
 export const _updateState = (connectionId, flag) => {
     const userLoginToken = Accounts._getLoginToken(connectionId);
     const loginTokens = RememberMeHelpers.getAllUserTokens(userLoginToken);
+    if (!loginTokens) {
+        return false;
+    }
 
     const updatedLoginTokens = loginTokens.map((loginToken) => {
         const record = loginToken;

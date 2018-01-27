@@ -37,7 +37,8 @@ class Authenticator {
             return {
                 result: false,
                 resultCode: -1,
-                reason: 'Attempt disallowed by Meteor'
+                reason: 'Attempt disallowed by Meteor',
+                error: this.loginAttempt.error
             };
         }
 
