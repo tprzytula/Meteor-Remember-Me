@@ -74,5 +74,4 @@ The default for rememberMe is true to match the behaviour of Meteor.
 
 ## Testing
 
-You can test this dependency by running:
-`npm run test`
+You can test this dependency by running `npm run test`

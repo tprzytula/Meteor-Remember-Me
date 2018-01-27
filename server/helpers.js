@@ -23,7 +23,7 @@ RememberMeHelpers.findMatchingUser = (userLoginToken) => {
  */
 RememberMeHelpers.getAllUserTokens = (loginToken) => {
     const user = RememberMeHelpers.findMatchingUser(loginToken);
-    if (!user) return [];
+    if (!user) return false;
     return user.services.resume.loginTokens || [];
 };
 

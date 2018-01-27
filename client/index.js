@@ -2,8 +2,8 @@ import { Accounts } from 'meteor/accounts-base';
 import overrideAccountsLogin from './overrideLogin';
 
 const RememberMe = {};
-
 const updateRememberMe = 'tprzytula:rememberMe-update';
+
 RememberMe.loginWithPassword = (user, password, callback = () => {}, rememberMe = true) => {
     let flag = rememberMe;
     let callbackMethod = () => {};
