@@ -1,2 +1,5 @@
 .idea
 .npm
+.git
+.vscode
+node_modules
