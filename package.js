@@ -23,5 +23,11 @@ Package.onTest((api) => {
     api.use('meteortesting:mocha');
     api.use('tprzytula:remember-me');
     api.use('practicalmeteor:chai');
+    api.use('practicalmeteor:sinon');
+    api.mainModule('test/client/index.js', 'client');
     api.mainModule('test/server/index.js', 'server');
+});
+
+Npm.depends({
+    sinon: '4.2.2'
 });

@@ -16,6 +16,7 @@
   ],
   "homepage": "https://github.com/tprzytulacc/Meteor-Remember-Me",
   "scripts": {
-    "test": "meteor test-packages ./ --driver-package meteortesting:mocha"
+    "test": "meteor test-packages ./ --once --driver-package meteortesting:mocha",
+    "test-watch": "TEST_WATCH=1 meteor test-packages ./ --full-app --driver-package meteortesting:mocha"
   }
 }

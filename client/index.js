@@ -31,4 +31,5 @@ Accounts.onLogin(() => {
     }
 });
 
+export const loginWithPassword = RememberMe.loginWithPassword;
 export default RememberMe;
