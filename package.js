@@ -23,10 +23,13 @@ Package.onTest((api) => {
     api.use('meteortesting:mocha');
     api.use('tprzytula:remember-me');
     api.use('practicalmeteor:chai');
+    api.use('practicalmeteor:sinon');
+    api.mainModule('test/client/index.js', 'client');
     api.mainModule('test/server/index.js', 'server');
 });
 
 Npm.depends({
     'crypto-js': '3.1.9-1',
-    lodash: '4.17.4'
+    lodash: '4.17.4',
+    sinon: '4.2.2'
 });
