@@ -1,6 +1,4 @@
-import _ from 'lodash';
-import Crypto from 'crypto-js';
-import Base64 from 'crypto-js/enc-base64';
+import Crypto from 'crypto';
 
 /**
  *  Gives tools to perform custom authentication.
@@ -22,8 +20,9 @@ class Authenticator {
      *  @return {string} hashedToken
      */
     static hashToken(token) {
-        const hashedToken = Crypto.SHA256(token);
-        return Base64.stringify(hashedToken);
+        const hash = Crypto.createHash('sha256');
+        hash.update(token);
+        return hash.digest('base64');
     }
 
     /**
@@ -74,14 +73,16 @@ class Authenticator {
     shouldResumeBeAccepted() {
         const loginTokens = this.getUsersLoginTokens();
         const hashedToken = this.getTokenFromAttempt();
-        const userResume = _.find(loginTokens, item => item.hashedToken === hashedToken);
+        const userResume = loginTokens.find(
+            item => item.hashedToken === hashedToken
+        );
         if (!userResume) {
             return false;
         }
-
-        const loggedAtLeastOnce = _.some(this.loginAttempt.methodArguments, {
-            loggedAtLeastOnce: true
-        });
+        const methodArguments = this.loginAttempt.methodArguments || [];
+        const loggedAtLeastOnce = methodArguments.some(
+            argument => argument.loggedAtLeastOnce === true
+        );
         return (userResume.rememberMe || loggedAtLeastOnce);
     }
 

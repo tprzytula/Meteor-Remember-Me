@@ -25,8 +25,3 @@ Package.onTest((api) => {
     api.use('practicalmeteor:chai');
     api.mainModule('test/server/index.js', 'server');
 });
-
-Npm.depends({
-    'crypto-js': '3.1.9-1',
-    lodash: '4.17.4'
-});
