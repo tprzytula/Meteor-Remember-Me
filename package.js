@@ -1,6 +1,6 @@
 Package.describe({
     name: 'tprzytula:remember-me',
-    version: '0.1.1',
+    version: '0.1.2',
     summary: 'Extension for Meteor account-base package with the implementation of rememberMe',
     git: 'https://github.com/tprzytulacc/Meteor-RememberMe',
     documentation: 'README.md'
@@ -29,7 +29,5 @@ Package.onTest((api) => {
 });
 
 Npm.depends({
-    'crypto-js': '3.1.9-1',
-    lodash: '4.17.4',
     sinon: '4.2.2'
 });
