@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.3] - 04.02.2018
+* Inform client if the functionality was not activated on the server
+* Client side unit tests
+
 ## [0.1.2] - 01.02.2018
 * Remove 'lodash' dependency, replace usages using ES6
 * Remove 'crypto-js' dependency, use 'crypto' instead
