@@ -1,4 +1,4 @@
-const RememberMe = require('meteor/tprzytula:remember-me');
+const RememberMe = require('meteor/tprzytula:remember-me').default;
 const rememberMeMethod = 'tprzytula:rememberMe-update';
 const sinon = require('sinon');
 

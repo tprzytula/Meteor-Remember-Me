@@ -1,3 +1,5 @@
+import { Accounts } from 'meteor/accounts-base';
+
 /**
  *  This function is used to override Account's function called callLoginMethod.
  *  We are using our custom implementation of remember me functionality where user
@@ -19,7 +21,7 @@
  *  Launching the app again means that it will became default again without our additions.
  *  Then the next successful login will override it again.
  */
-export default () => {
+const overrideLoginMethod = () => {
     const accountsCallLoginMethod = Accounts.callLoginMethod.bind(Accounts);
     Accounts.callLoginMethod = function (options = {}) {
         const preparedOptions = options;
@@ -32,4 +34,15 @@ export default () => {
         }
         accountsCallLoginMethod(preparedOptions);
     };
+};
+
+export default () => {
+    let loginOverridden = false;
+    Accounts.onLogin(() => {
+        /* Override meteor accounts callLoginMethod to store information that user logged before */
+        if (!loginOverridden) {
+            overrideLoginMethod();
+            loginOverridden = true;
+        }
+    });
 };

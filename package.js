@@ -26,8 +26,8 @@ Package.onTest((api) => {
     api.use('practicalmeteor:sinon');
     api.mainModule('test/client/index.js', 'client');
     api.mainModule('test/server/index.js', 'server');
-});
+    Npm.depends({
+        sinon: '4.2.2'
+    });
 
-Npm.depends({
-    sinon: '4.2.2'
 });
