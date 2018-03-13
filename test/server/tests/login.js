@@ -1,6 +1,6 @@
-const { chai } = require('meteor/practicalmeteor:chai');
 const Authenticator = require('../../../server/authenticator').default;
 const LoginAttemptGenerator = require('../utils/loginAttemptGenerator');
+const chai = require('ultimate-chai');
 
 const expect = chai.expect;
 const type = 'password';
@@ -16,13 +16,13 @@ module.exports = () => {
          *  The attempt can be disallowed already from the previously
          *  ran validators. It can be a validator directly from the Meteor core
          *  saying that the password is wrong but also another one created by the developer.
-         * 
+         *
          *  In this case there is no need to validate the attempt anymore.
          *  It should be instantly disallowed again.
          */
         it('should not pass if the attempt is already disallowed', () => {
             const loginAttemptGenerator = new LoginAttemptGenerator({ type });
-            let loginAttempt = loginAttemptGenerator.getLoginAttempt();
+            const loginAttempt = loginAttemptGenerator.getLoginAttempt();
             loginAttempt.allowed = false;
             const authenticator = new Authenticator(loginAttempt);
             const { result, resultCode, reason } = authenticator.validateAttempt();
@@ -38,7 +38,7 @@ module.exports = () => {
          */
         it('should pass if the attempt is allowed', () => {
             const loginAttemptGenerator = new LoginAttemptGenerator({ type });
-            let loginAttempt = loginAttemptGenerator.getLoginAttempt();
+            const loginAttempt = loginAttemptGenerator.getLoginAttempt();
             loginAttempt.allowed = true;
             const authenticator = new Authenticator(loginAttempt);
             const { result, resultCode, reason } = authenticator.validateAttempt();

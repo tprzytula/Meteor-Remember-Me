@@ -4,7 +4,7 @@
  *  on the server side on every login attempt.
  *  To test unit test this functionality they have to
  *  be provided in the same form to the methods.
- *  
+ *
  *  @property {Object} loginAttempt
  *  @class
  */
@@ -15,8 +15,8 @@ class LoginAttemptGenerator {
 
     /**
      *  Creates loginAttempt object according to the provided options.
-     *  @param {*} param0 
-     */ 
+     *  @param {*} param0
+     */
     createAttempt({ type = 'password', allowed = true, resume }) {
         this.loginAttempt = {
             type,
@@ -24,11 +24,11 @@ class LoginAttemptGenerator {
             methodName: 'login',
             methodArguments: [],
             user: {},
-            connection: {}
+            connection: {},
         };
 
         if (type === 'resume') {
-            this.loginAttempt.user = Meteor.users.findOne();;
+            this.loginAttempt.user = Meteor.users.findOne();
         }
 
         if (resume) {
@@ -49,8 +49,8 @@ class LoginAttemptGenerator {
      *  On the running meteor environments method arguments
      *  are being sent by user together with the login attempt.
      *  They are including data for the authorization.
-     *  @param {Object} argument 
-     */ 
+     *  @param {Object} argument
+     */
     addMethodArgument(argument = {}) {
         this.loginAttempt.methodArguments.push(argument);
     }

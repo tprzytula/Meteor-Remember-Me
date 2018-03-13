@@ -14,7 +14,12 @@ export const activate = () => {
     methods();
     Accounts.validateLoginAttempt((attempt) => {
         const authenticator = new Authenticator(attempt);
-        const { result, resultCode, reason, error } = authenticator.validateAttempt();
+        const {
+            result,
+            resultCode,
+            reason,
+            error,
+        } = authenticator.validateAttempt();
         if (error) {
             throw error;
         } else if (!result) {
@@ -31,7 +36,7 @@ export const activate = () => {
  *  @returns {boolean} result
  *  @private
  */
-export const _updateState = (connectionId, flag) => {
+export const updateState = (connectionId, flag) => {
     const userLoginToken = Accounts._getLoginToken(connectionId);
     const loginTokens = RememberMeHelpers.getAllUserTokens(userLoginToken);
     if (!loginTokens) {

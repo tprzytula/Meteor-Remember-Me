@@ -1,7 +1,9 @@
 const RememberMe = require('meteor/tprzytula:remember-me');
-const { chai } = require('meteor/practicalmeteor:chai');
 
 const rememberMeMethod = 'tprzytula:rememberMe-update';
+const chai = require('ultimate-chai');
+
+const expect = chai.expect;
 const getMeteorMethods = () => Meteor.default_server.method_handlers;
 const checkIfMeteorMethodExists = name => name in getMeteorMethods();
 
