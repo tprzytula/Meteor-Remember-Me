@@ -1,0 +1,37 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:meteor/recommended"
+  ],
+  "plugins": [
+    "meteor"
+  ],
+  "env": {
+    "meteor": true
+  },
+  "settings": {
+    "import/resolver": "meteor"
+  },
+  "parser": "babel-eslint",
+  "globals": {
+    "Meteor": true,
+    "it": true,
+    "describe": true
+  },
+  "rules": {
+    "comma-dangle": [
+      0
+    ],
+    "indent": [
+        2,
+        4,
+        {
+          "SwitchCase": 1
+        }
+    ],
+    "import/extensions": [
+      "off",
+      "never"
+    ]
+  }
+}

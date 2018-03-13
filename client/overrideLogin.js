@@ -1,4 +1,5 @@
-import { Accounts } from 'meteor/accounts-base';
+const isMethodOverridden = 'tprzytula:remember-me_overridden';
+const isCallbackRegistered = 'tprzytula:remember-me_callbackRegistered';
 
 /**
  *  This function is used to override Account's function called callLoginMethod.
@@ -21,9 +22,9 @@ import { Accounts } from 'meteor/accounts-base';
  *  Launching the app again means that it will became default again without our additions.
  *  Then the next successful login will override it again.
  */
-const overrideLoginMethod = () => {
-    const accountsCallLoginMethod = Accounts.callLoginMethod.bind(Accounts);
-    Accounts.callLoginMethod = function (options = {}) {
+const overrideLoginMethod = (accountsClientInstance) => {
+    const accountsCallLoginMethod = accountsClientInstance.callLoginMethod.bind(accountsClientInstance);
+    accountsClientInstance.callLoginMethod = function callLoginMethod(options = {}) {
         const preparedOptions = options;
         if (preparedOptions) {
             if (preparedOptions.methodArguments) {
@@ -34,15 +35,19 @@ const overrideLoginMethod = () => {
         }
         accountsCallLoginMethod(preparedOptions);
     };
+    accountsClientInstance[isMethodOverridden] = true;
 };
 
-export default () => {
-    let loginOverridden = false;
-    Accounts.onLogin(() => {
+export default (accountsClientInstance) => {
+    if (isCallbackRegistered in accountsClientInstance) {
+        // onLogin callback is already registered
+        return;
+    }
+    accountsClientInstance.onLogin(() => {
         /* Override meteor accounts callLoginMethod to store information that user logged before */
-        if (!loginOverridden) {
-            overrideLoginMethod();
-            loginOverridden = true;
+        if (!(isMethodOverridden in accountsClientInstance)) {
+            overrideLoginMethod(accountsClientInstance);
         }
     });
+    accountsClientInstance[isCallbackRegistered] = true;
 };

@@ -1,5 +1,5 @@
 import { check } from 'meteor/check';
-import { _updateState } from './index.js';
+import { updateState } from './index.js';
 
 // Name of the method should be unique to not override others
 const updateRememberMeMethod = 'tprzytula:rememberMe-update';
@@ -15,7 +15,7 @@ export default () => {
         [updateRememberMeMethod](flag = true) {
             check(flag, Boolean);
             const connectionId = this.connection.id;
-            return _updateState(connectionId, flag);
+            return updateState(connectionId, flag);
         }
     });
 };

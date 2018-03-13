@@ -2,7 +2,7 @@ const Authenticator = require('./../../../server/authenticator').default;
 
 /**
  *  Manages a test user for testing purposes.
- * 
+ *
  *  @property {string} username
  *  @property {string} password
  *  @class
@@ -38,22 +38,22 @@ class TestUser {
         Accounts.createUser({
             username: this.username,
             password: this.password
-        });   
+        });
     }
 
     /**
      *  Creates and sets login tokens for the user according
      *  to the provided to the method options.
-     *  @param {Object} options 
+     *  @param {Object} options
      *  @returns {boolean} result
      */
     setLoginToken({ resume, rememberMe = true }) {
         const loginToken = {
             when: new Date(),
             hashedToken: Authenticator.hashToken(resume),
-            rememberMe
+            rememberMe,
         };
-        
+
         const user = Meteor.users.findOne({ username: this.username });
         if (!user) {
             return false;

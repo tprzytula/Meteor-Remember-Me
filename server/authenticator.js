@@ -73,16 +73,12 @@ class Authenticator {
     shouldResumeBeAccepted() {
         const loginTokens = this.getUsersLoginTokens();
         const hashedToken = this.getTokenFromAttempt();
-        const userResume = loginTokens.find(
-            item => item.hashedToken === hashedToken
-        );
+        const userResume = loginTokens.find(item => item.hashedToken === hashedToken);
         if (!userResume) {
             return false;
         }
         const methodArguments = this.loginAttempt.methodArguments || [];
-        const loggedAtLeastOnce = methodArguments.some(
-            argument => argument.loggedAtLeastOnce === true
-        );
+        const loggedAtLeastOnce = methodArguments.some(argument => argument.loggedAtLeastOnce === true);
         return (userResume.rememberMe || loggedAtLeastOnce);
     }
 

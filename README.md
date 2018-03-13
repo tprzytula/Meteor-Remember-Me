@@ -72,6 +72,10 @@ Wrapper for a Meteor.loginWithPassword with an addition of rememberMe as a last 
 
 The default for rememberMe is true to match the behaviour of Meteor.
 
+`changeAccountsSystem(AccountsClient: customAccounts)`
+
+Gives the possibility to set a custom accounts instance to be used for the login system ([more details](./CUSTOM_ACCOUNTS.md))
+
 ## Testing
 
 You can test this dependency by running `npm run test`

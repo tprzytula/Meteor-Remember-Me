@@ -1,14 +1,14 @@
-const { chai } = require('meteor/practicalmeteor:chai');
 const TestUser = require('../utils/testUser');
 const Authenticator = require('../../../server/authenticator').default;
-const LoginAttemptGenerator = require('../utils/loginAttemptGenerator')
+const LoginAttemptGenerator = require('../utils/loginAttemptGenerator');
+const chai = require('ultimate-chai');
 
 const expect = chai.expect;
 const type = 'resume';
 const resume = 'token';
 const testUser = new TestUser({
     username: 'resume-test',
-    password: 'resume-test'
+    password: 'resume-test',
 });
 
 module.exports = () => {
@@ -17,7 +17,7 @@ module.exports = () => {
      *  The attempt is invoked by the core of the meteor accounts.
      *  Every time a previously logged in user reconnects to the system
      *  there is a "resume" attempt sent.
-     * 
+     *
      *  This dependency did allow the user to decide during the login
      *  if he want to have the rememberMe flag set on true or false.
      *  This setting will have an importance of the decision being made during resume.
@@ -62,7 +62,7 @@ module.exports = () => {
          *  when the user is starting the app from the scratch or just lost the internet.
          *  It's not intended to logout an user without rememberMe every time he will lose
          *  the internet connection.
-         * 
+         *
          *  To avoid this situation the user from now is sending also 'loggedAtLeastOnce: true'
          *  flag if he already logged once in ongoing device session.
          */
@@ -83,7 +83,7 @@ module.exports = () => {
                 expect(resultCode).to.be.equal(0);
                 expect(reason).to.be.equal('Validation passed');
             });
-    
+
             /**
              *  If the user already had a successfull login attempt during his device session
              *  then he should stay logged in no matter the rememberMe setting after the reconnect.

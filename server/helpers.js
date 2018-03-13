@@ -5,15 +5,13 @@ const RememberMeHelpers = {};
  *  @param userLoginToken
  *  @returns {Object} user
  */
-RememberMeHelpers.findMatchingUser = (userLoginToken) => {
-    return Meteor.users.findOne({
-        'services.resume.loginTokens.hashedToken': userLoginToken
-    }, {
-        fields: {
-            'services.resume.loginTokens': 1
-        }
-    });
-};
+RememberMeHelpers.findMatchingUser = userLoginToken => Meteor.users.findOne({
+    'services.resume.loginTokens.hashedToken': userLoginToken
+}, {
+    fields: {
+        'services.resume.loginTokens': 1
+    }
+});
 
 /**
  *  Returns all currently stored login token records for

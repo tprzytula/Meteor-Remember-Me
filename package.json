@@ -1,6 +1,6 @@
 {
   "name": "rememberMe",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Extension for Meteor account-base package with the implementation of rememberMe",
   "license": "MIT",
   "author": "Tomasz Przytuła <t.przytula.dev@gmail.com>",
@@ -16,7 +16,17 @@
   ],
   "homepage": "https://github.com/tprzytulacc/Meteor-Remember-Me",
   "scripts": {
+    "eslint": "eslint ./client ./server ./test || true",
+    "eslint-fix": "eslint ./client ./server ./test --fix || true",
     "test": "meteor test-packages ./ --once --driver-package meteortesting:mocha",
     "test-watch": "TEST_WATCH=1 meteor test-packages ./ --full-app --driver-package meteortesting:mocha"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "eslint": "4.18.2",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-import-resolver-meteor": "^0.4.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-meteor": "^4.2.0"
   }
 }
