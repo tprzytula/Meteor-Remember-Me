@@ -34,25 +34,25 @@ To activate the functionality:
 
 1. Import the package on server side:
 
-```
+```js
 import RememberMe from 'meteor/tprzytula:remember-me';
 ```
 
 2. Activate the functionality:
 
-```
+```js
 RememberMe.activate()
 ```
 
 3. Import the package on client side:
 
-```
+```js
 import RememberMe from 'meteor/tprzytula:remember-me';
 ```
 
 4. Change your login method to this:
 
-```
+```js
 RememberMe.loginWithPassword(username, password, (error) => {
     // Your previous logic
 }, true)
@@ -60,7 +60,7 @@ RememberMe.loginWithPassword(username, password, (error) => {
 
 If you don't need a callback then you can simply change it to:
 
-```
+```js
 RememberMe.loginWithPassword(username, password, true)
 ```
 
