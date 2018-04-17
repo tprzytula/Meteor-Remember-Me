@@ -2,7 +2,7 @@
 
 ## [0.2.0] - 13.03.2018
 New feature:
-* Add support for custom AccountsClient ([introduction](./CUSTOM_ACCOUNTS.md))
+* Add support for custom AccountsClient ([introduction](CUSTOM_ACCOUNTS.md))
 
 Related improvements:
 * Check if onLogin callback from the dependency is already present

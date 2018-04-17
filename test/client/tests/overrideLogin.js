@@ -1,11 +1,11 @@
-const AccountsClient = require('meteor/accounts-base').AccountsClient;
+const { AccountsClient } = require('meteor/accounts-base');
 const RememberMe = require('meteor/tprzytula:remember-me').RememberMeClass;
 
 const isMethodOverridden = 'tprzytula:remember-me_overridden';
 const isCallbackRegistered = 'tprzytula:remember-me_callbackRegistered';
 const chai = require('ultimate-chai');
 
-const expect = chai.expect;
+const { expect } = chai;
 
 module.exports = () => {
     /**
@@ -31,7 +31,7 @@ module.exports = () => {
             const rememberMe = new RememberMe();
             const connection = DDP.connect('127.0.0.1:3000');
             const preparedAccounts = new AccountsClient({ connection });
-            const callbacks = preparedAccounts._onLoginHook.callbacks;
+            const { callbacks } = preparedAccounts._onLoginHook;
 
             const beforeInitialization = Object.keys(callbacks).length;
             expect(beforeInitialization).to.be.equal(0);
@@ -54,7 +54,7 @@ module.exports = () => {
             const rememberMe = new RememberMe();
             const connection = DDP.connect('127.0.0.1:3000');
             const preparedAccounts = new AccountsClient({ connection });
-            const callbacks = preparedAccounts._onLoginHook.callbacks;
+            const { callbacks } = preparedAccounts._onLoginHook;
 
             rememberMe.changeAccountsSystem(preparedAccounts);
             rememberMe.changeAccountsSystem(preparedAccounts);
@@ -77,7 +77,7 @@ module.exports = () => {
             rememberMe.changeAccountsSystem(preparedAccounts);
             expect(isMethodOverridden in preparedAccounts).to.be.equal(false);
 
-            const callbacks = preparedAccounts._onLoginHook.callbacks;
+            const { callbacks } = preparedAccounts._onLoginHook;
             callbacks['0']();
             expect(isMethodOverridden in preparedAccounts).to.be.equal(true);
         });

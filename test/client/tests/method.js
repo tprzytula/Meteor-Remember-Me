@@ -4,7 +4,7 @@ const rememberMeMethod = 'tprzytula:rememberMe-update';
 const sinon = require('sinon');
 const chai = require('ultimate-chai');
 
-const expect = chai.expect;
+const { expect } = chai;
 
 module.exports = () => {
     /**
