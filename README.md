@@ -22,7 +22,7 @@ your phone and then without rememberMe on your tablet then the autologin will st
 active for your phone!.
 
 ## Changelog
-[Meteor Remember-Me - Changelog](CHANGELOG.md)
+[Meteor Remember-Me - Changelog](doc/CHANGELOG.md)
 
 ## Installation
 
@@ -74,7 +74,7 @@ The default for rememberMe is true to match the behaviour of Meteor.
 
 `changeAccountsSystem(AccountsClient: customAccounts)`
 
-Gives the possibility to set a custom accounts instance to be used for the login system ([more details](CUSTOM_ACCOUNTS.md))
+Gives the possibility to set a custom accounts instance to be used for the login system ([more details](doc/CUSTOM_ACCOUNTS.md))
 
 ## Testing
 
