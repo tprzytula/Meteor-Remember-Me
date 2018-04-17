@@ -2,7 +2,7 @@ const Authenticator = require('../../../server/authenticator').default;
 const LoginAttemptGenerator = require('../utils/loginAttemptGenerator');
 const chai = require('ultimate-chai');
 
-const expect = chai.expect;
+const { expect } = chai;
 const type = 'password';
 
 module.exports = () => {

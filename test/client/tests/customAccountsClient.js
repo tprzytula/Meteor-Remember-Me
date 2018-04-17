@@ -1,9 +1,10 @@
-const AccountsClient = require('meteor/accounts-base').AccountsClient;
+const { AccountsClient } = require('meteor/accounts-base');
 const RememberMe = require('meteor/tprzytula:remember-me').RememberMeClass;
 
 const sinon = require('sinon');
 const chai = require('ultimate-chai');
-const expect = chai.expect;
+
+const { expect } = chai;
 
 const rememberMeMethod = 'tprzytula:rememberMe-update';
 

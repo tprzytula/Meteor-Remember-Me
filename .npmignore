@@ -1,6 +1,19 @@
+# IDE
 .idea
-.npm
-.git
 .vscode
-node_modules
+
+# Git
+.git
+.gitignore
+
+# Test & Development tools
+.meteor
+.meteorignore
+.eslintrc
+package.json
+package-lock.json
 test
+appveyor.yml
+.travis.yml
+node_modules
+npm-debug.log
