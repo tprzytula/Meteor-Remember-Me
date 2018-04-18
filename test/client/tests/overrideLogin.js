@@ -16,7 +16,6 @@ module.exports = () => {
      *  by server to perform suitable logic.
      */
     describe('Overriding internal login method', () => {
-
         /**
          *  By default freshly created instance of AccountsClient should
          *  not have any onLogin callbacks set yet. Upon creating

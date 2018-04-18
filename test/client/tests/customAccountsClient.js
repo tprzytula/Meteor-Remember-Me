@@ -16,7 +16,6 @@ module.exports = () => {
      *  DDP connection pointing to the desired server.
      */
     describe('Support for custom AccountsClient', () => {
-
         /**
          *  From the release 0.2.0 a new API method "changeAccountsSystem"
          *  is provided. Using this method it's possible to switch from
@@ -24,7 +23,6 @@ module.exports = () => {
          *  a custom one.
          */
         describe('Changing the default accounts system', () => {
-
             /**
              *  It's important to only accept instanced of the AccountsClient.
              *  All invalid parameters should not be accepted, which means
@@ -52,7 +50,6 @@ module.exports = () => {
         });
 
         describe('Adjusting received AccountsClient', () => {
-
             it('should append "loginWithPassword" method if there is none', () => {
                 const rememberMe = new RememberMe();
                 const connection = DDP.connect('127.0.0.1:3000');
@@ -61,11 +58,9 @@ module.exports = () => {
                 rememberMe.changeAccountsSystem(preparedAccounts);
                 expect('loginWithPassword' in preparedAccounts.connection).to.be.equal(true);
             });
-
         });
 
         describe('Should start using the passed custom AccountsClient', () => {
-
             /**
              *  Each time the wrapper is called it
              *  should also internally call the Meteor's login method.

@@ -109,7 +109,7 @@ module.exports = () => {
                 callback(error);
             });
             const obj = {};
-            obj.callback = error => error;
+            obj.callback = callbackError => callbackError;
             const callbackSpy = sinon.spy(obj, 'callback');
             rememberMe.loginWithPassword('username', 'password', obj.callback);
             expect(loginWithPassword).to.have.been.calledOnce();

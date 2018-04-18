@@ -78,7 +78,8 @@ class Authenticator {
             return false;
         }
         const methodArguments = this.loginAttempt.methodArguments || [];
-        const loggedAtLeastOnce = methodArguments.some(argument => argument.loggedAtLeastOnce === true);
+        const loggedAtLeastOnce =
+            methodArguments.some(argument => argument.loggedAtLeastOnce === true);
         return (userResume.rememberMe || loggedAtLeastOnce);
     }
 

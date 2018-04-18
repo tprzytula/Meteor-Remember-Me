@@ -17,6 +17,7 @@
   "homepage": "https://github.com/tprzytulacc/Meteor-Remember-Me",
   "scripts": {
     "eslint": "eslint ./client ./server ./test || true",
+    "eslint-check": "eslint ./client ./server ./test",
     "eslint-fix": "eslint ./client ./server ./test --fix || true",
     "test": "cross-env TEST_BROWSER_DRIVER=chrome meteor test --once --driver-package meteortesting:mocha"
   },
@@ -30,11 +31,21 @@
     "eslint-import-resolver-meteor": "^0.4.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-meteor": "^4.2.0",
+    "pre-commit": "^1.2.2",
+    "pre-push": "^0.1.1",
     "selenium-webdriver": "3.0.0-beta-2",
     "sinon": "^4.5.0",
     "ultimate-chai": "^4.1.1"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.44"
-  }
+  },
+  "pre-commit": [
+    "eslint-check",
+    "test"
+  ],
+  "pre-push": [
+    "eslint-check",
+    "test"
+  ]
 }

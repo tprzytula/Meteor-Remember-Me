@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: 0 */
+
 const isMethodOverridden = 'tprzytula:remember-me_overridden';
 const isCallbackRegistered = 'tprzytula:remember-me_callbackRegistered';
 
@@ -15,7 +17,9 @@ const isCallbackRegistered = 'tprzytula:remember-me_callbackRegistered';
  *
  *  Overriding this function after first successful login gives us possibility to
  *  send another parameter "loggedAtLeastOnce" to the every next login request in the
- *  current application session. This parameter can be recognized by server to perform suitable logic.
+ *  current application session. This parameter can be recognized by server
+ *  to perform suitable logic.
+ *
  *  This method is internal and is invoked without our logic on every login attempt which is also
  *  made by Meteor on every reconnect.
  *
@@ -23,7 +27,8 @@ const isCallbackRegistered = 'tprzytula:remember-me_callbackRegistered';
  *  Then the next successful login will override it again.
  */
 const overrideLoginMethod = (accountsClientInstance) => {
-    const accountsCallLoginMethod = accountsClientInstance.callLoginMethod.bind(accountsClientInstance);
+    const accountsCallLoginMethod =
+        accountsClientInstance.callLoginMethod.bind(accountsClientInstance);
     accountsClientInstance.callLoginMethod = function callLoginMethod(options = {}) {
         const preparedOptions = options;
         if (preparedOptions) {

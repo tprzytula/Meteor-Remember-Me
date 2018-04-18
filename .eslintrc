@@ -32,6 +32,8 @@
     "import/extensions": [
       "off",
       "never"
-    ]
+    ],
+    "no-underscore-dangle": 0,
+    "no-console": 0
   }
 }
