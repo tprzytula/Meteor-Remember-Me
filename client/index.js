@@ -31,11 +31,13 @@ class RememberMe {
      *  @returns {function} loginWithPassword
      *  @private
      */
-    getLoginWithPasswordMethod() {
-        return this.remoteConnection
-            ? this.remoteConnection.loginWithPassword
-            : Meteor.loginWithPassword;
-    }
+    getLoginWithPasswordMethod = () => {
+        if (this.remoteConnection) {
+            return this.remoteConnection.loginWithPassword;
+        }
+
+        return Meteor.loginWithPassword;
+    };
 
     /**
      *  Returns call method either from the main
@@ -43,11 +45,13 @@ class RememberMe {
      *  @returns {function} call
      *  @private
      */
-    getCallMethod() {
-        return this.remoteConnection
-            ? this.remoteConnection.call.bind(this.remoteConnection)
-            : Meteor.call;
-    }
+    getCallMethod = () => {
+        if (this.remoteConnection) {
+            return this.remoteConnection.call.bind(this.remoteConnection);
+        }
+
+        return Meteor.call;
+    };
 
     /**
      *  Wrapper for the Meteor.loginWithPassword
@@ -57,7 +61,7 @@ class RememberMe {
      *  update the rememberMe flag on the server side.
      *  @public
      */
-    loginWithPassword(...params) {
+    loginWithPassword = (...params) => {
         const [user, password, ...rest] = params;
         const flag = exportFlagFromParams(rest);
         const callbackMethod = exportCallbackFromParams(rest);
@@ -68,7 +72,7 @@ class RememberMe {
             }
             callbackMethod(error);
         });
-    }
+    };
 
     /**
      *  Sends request to the server to update
@@ -76,7 +80,7 @@ class RememberMe {
      *  @param {boolean} flag
      *  @private
      */
-    updateFlag(flag) {
+    updateFlag = (flag) => {
         const callMethod = this.getCallMethod();
         callMethod(this.methodName, flag, (error) => {
             if (error && error.error === 404) {
@@ -94,7 +98,7 @@ class RememberMe {
                 );
             }
         });
-    }
+    };
 
     /**
      *  Switches from using the current login system to
@@ -104,7 +108,7 @@ class RememberMe {
      *  @returns {boolean} result
      *  @public
      */
-    changeAccountsSystem(customAccounts) {
+    changeAccountsSystem = (customAccounts) => {
         if (customAccounts instanceof AccountsClient &&
             customAccounts.connection) {
             this.remoteConnection = customAccounts.connection;
@@ -115,7 +119,7 @@ class RememberMe {
         console.error('meteor/tprzytula:remember-me' +
             '\nProvided parameter is not a valid AccountsClient.');
         return false;
-    }
+    };
 
     /**
      *  Since freshly created AccountsClients are not having
@@ -123,7 +127,7 @@ class RememberMe {
      *  the set accounts system will contain it.
      *  @private
      */
-    setLoginMethod() {
+    setLoginMethod = () => {
         if ('loginWithPassword' in this.remoteConnection) {
             // Login method is already present
             return;
@@ -162,7 +166,7 @@ class RememberMe {
             });
         };
         /* eslint-enable */
-    }
+    };
 }
 
 export default new RememberMe();
