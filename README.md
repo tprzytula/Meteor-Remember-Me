@@ -78,4 +78,4 @@ Gives the possibility to set a custom accounts instance to be used for the login
 
 ## Testing
 
-You can test this dependency by running `npm run test`
+You can test this dependency by running `npm run test` or check the recent results from circleci & travis-ci

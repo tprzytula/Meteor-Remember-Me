@@ -1,3 +1,4 @@
+const { Accounts } = require('meteor/accounts-base');
 const Authenticator = require('./../../../server/authenticator').default;
 
 /**

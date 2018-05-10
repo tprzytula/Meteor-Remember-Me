@@ -1,6 +1,6 @@
 {
   "name": "rememberMe",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Extension for Meteor account-base package with the implementation of rememberMe",
   "license": "MIT",
   "author": "Tomasz Przytuła <t.przytula.dev@gmail.com>",
@@ -19,9 +19,11 @@
     "eslint": "eslint ./client ./server ./test || true",
     "eslint-check": "eslint ./client ./server ./test",
     "eslint-fix": "eslint ./client ./server ./test --fix || true",
-    "test": "cross-env TEST_BROWSER_DRIVER=chrome meteor test --once --driver-package meteortesting:mocha"
+    "test": "cross-env TEST_BROWSER_DRIVER=chrome meteor test --once --driver-package meteortesting:mocha",
+    "test-watch": "cross-env WATCH=1 TEST_BROWSER_DRIVER=chrome meteor test --driver-package meteortesting:mocha"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.0.0-beta.44",
     "babel-eslint": "^8.2.2",
     "bcrypt": "^2.0.0",
     "chromedriver": "^2.37.0",
@@ -36,9 +38,6 @@
     "selenium-webdriver": "3.0.0-beta-2",
     "sinon": "^4.5.0",
     "ultimate-chai": "^4.1.1"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.44"
   },
   "pre-commit": [
     "eslint-check",

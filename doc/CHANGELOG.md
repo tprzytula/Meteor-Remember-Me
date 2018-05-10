@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.2.1] - 10.05.2018
+* Change client methods to arrow functions to prevent wrong context issues ([Issue #6](https://github.com/tprzytula/Meteor-Remember-Me/issues/6))
+* loginWithPassword method for custom accounts was throwing an error if accounts were not stored in `Meteor.remoteUsers` (whoops!)
+
 ## [0.2.0] - 13.03.2018
 New feature:
 * Add support for custom AccountsClient ([introduction](CUSTOM_ACCOUNTS.md))
