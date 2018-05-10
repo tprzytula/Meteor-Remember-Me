@@ -112,7 +112,7 @@ class RememberMe {
         if (customAccounts instanceof AccountsClient &&
             customAccounts.connection) {
             this.remoteConnection = customAccounts.connection;
-            this.setLoginMethod();
+            this.setLoginMethod(customAccounts);
             overrideAccountsLogin(customAccounts);
             return true;
         }
@@ -125,9 +125,10 @@ class RememberMe {
      *  Since freshly created AccountsClients are not having
      *  this method by default it's required to make sure that
      *  the set accounts system will contain it.
+     *  @param {AccountsClient} accountsInstance
      *  @private
      */
-    setLoginMethod = () => {
+    setLoginMethod = (accountsInstance) => {
         if ('loginWithPassword' in this.remoteConnection) {
             // Login method is already present
             return;
@@ -144,7 +145,7 @@ class RememberMe {
                     ? { username: selector }
                     : { email: selector };
             }
-            Meteor.remoteUsers.callLoginMethod({
+            accountsInstance.callLoginMethod({
                 methodArguments: [{
                     user: selector,
                     password: Accounts._hashPassword(password)
