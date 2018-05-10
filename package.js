@@ -3,7 +3,7 @@ Package.describe({
     version: '0.2.1',
     summary: 'Extension for Meteor account-base package with the implementation of rememberMe',
     git: 'https://github.com/tprzytulacc/Meteor-RememberMe',
-    documentation: 'doc/README.md'
+    documentation: 'README.md'
 });
 
 Package.onUse((api) => {
