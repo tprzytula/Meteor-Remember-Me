@@ -19,14 +19,16 @@
     "eslint": "eslint ./client ./server ./test || true",
     "eslint-check": "eslint ./client ./server ./test",
     "eslint-fix": "eslint ./client ./server ./test --fix || true",
-    "test": "cross-env TEST_BROWSER_DRIVER=chrome meteor test --once --driver-package meteortesting:mocha",
-    "test-watch": "cross-env WATCH=1 TEST_BROWSER_DRIVER=chrome meteor test --driver-package meteortesting:mocha"
+    "test": "cross-env TEST_BROWSER_DRIVER=chrome COVERAGE=1 COVERAGE_OUT_LCOVONLY=1 COVERAGE_OUT_HTML=1 COVERAGE_OUT_TEXT_SUMMARY=1 COVERAGE_APP_FOLDER=$PWD/ meteor test --once --driver-package meteortesting:mocha",
+    "test-watch": "cross-env WATCH=1 TEST_BROWSER_DRIVER=chrome meteor test --driver-package meteortesting:mocha",
+    "coveralls": "cat .coverage/lcov.info | coveralls"
   },
   "devDependencies": {
     "@babel/runtime": "^7.0.0-beta.44",
     "babel-eslint": "^8.2.2",
     "bcrypt": "^2.0.0",
     "chromedriver": "^2.37.0",
+    "coveralls": "^3.0.1",
     "cross-env": "^5.1.4",
     "eslint": "4.18.2",
     "eslint-config-airbnb-base": "^12.1.0",

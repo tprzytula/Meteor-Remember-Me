@@ -135,6 +135,7 @@ class RememberMe {
         }
 
         /* eslint-disable */
+        /* istanbul ignore next */
         /*
             The method is based on the original one in Accounts:
             https://github.com/meteor/meteor/blob/46257bad264bf089e35e0fe35494b51fe5849c7b/packages/accounts-password/password_client.js#L33

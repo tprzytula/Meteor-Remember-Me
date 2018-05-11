@@ -12,15 +12,21 @@ class TestUser {
     constructor(options = {}) {
         this.username = options.username || 'test';
         this.password = options.password || 'test';
-        this.init();
     }
 
     /**
      *  Invoked at the class initialization.
      */
     init() {
-        this.removeUser();
         this.createUser();
+    }
+
+    /**
+     *  Returns user document from the collection.
+     *  @returns {Object} user
+     */
+    getUser() {
+        return Meteor.users.findOne({ username: this.username });
     }
 
     /**
