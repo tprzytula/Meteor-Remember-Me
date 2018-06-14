@@ -1,4 +1,5 @@
-# Meteor - Remember Me
+# Meteor - Remember Me 
+[![Build Status](https://travis-ci.org/tprzytula/Meteor-Remember-Me.svg?branch=master)](https://travis-ci.org/tprzytula/Meteor-Remember-Me) [![Coverage Status](https://coveralls.io/repos/github/tprzytula/Meteor-Remember-Me/badge.svg)](https://coveralls.io/github/tprzytula/Meteor-Remember-Me)
 ### Integrated remember me functionality support for Meteor
 
 
