@@ -17,3 +17,4 @@ appveyor.yml
 .travis.yml
 node_modules
 npm-debug.log
+.coverage

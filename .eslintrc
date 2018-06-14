@@ -16,7 +16,9 @@
   "globals": {
     "Meteor": true,
     "it": true,
-    "describe": true
+    "describe": true,
+    "beforeEach": true,
+    "afterEach": true
   },
   "rules": {
     "comma-dangle": [
@@ -34,6 +36,8 @@
       "never"
     ],
     "no-underscore-dangle": 0,
-    "no-console": 0
+    "no-console": 0,
+    "one-var-declaration-per-line": 0,
+    "one-var": 0
   }
 }

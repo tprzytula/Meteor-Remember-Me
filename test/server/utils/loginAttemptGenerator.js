@@ -15,9 +15,13 @@ class LoginAttemptGenerator {
 
     /**
      *  Creates loginAttempt object according to the provided options.
-     *  @param {*} param0
+     *  @param {Object} configuration
      */
-    createAttempt({ type = 'password', allowed = true, resume }) {
+    createAttempt({
+        type = 'password',
+        allowed = true,
+        user
+    }) {
         this.loginAttempt = {
             type,
             allowed,
@@ -28,11 +32,7 @@ class LoginAttemptGenerator {
         };
 
         if (type === 'resume') {
-            this.loginAttempt.user = Meteor.users.findOne();
-        }
-
-        if (resume) {
-            this.loginAttempt.methodArguments.push({ resume });
+            this.loginAttempt.user = user || Meteor.users.findOne();
         }
     }
 
