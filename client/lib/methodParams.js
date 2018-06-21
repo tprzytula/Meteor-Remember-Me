@@ -7,8 +7,8 @@
  */
 export const exportFlagFromParams = (params = []) => {
     const [
-        firstParam = () => {},
-        secondParam = true,
+        firstParam,
+        secondParam = true
     ] = params;
     return (typeof firstParam === 'boolean')
         ? firstParam

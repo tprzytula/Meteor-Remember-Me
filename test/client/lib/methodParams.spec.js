@@ -1,7 +1,8 @@
-const { exportFlagFromParams, exportCallbackFromParams } = require('./../../client/helpers');
-const chai = require('ultimate-chai');
-
-const { expect } = chai;
+import { expect } from 'ultimate-chai';
+import {
+    exportFlagFromParams,
+    exportCallbackFromParams
+} from './../../../client/lib/methodParams';
 
 describe('Given exportFlagFromParams', () => {
     const sampleFlag = false;

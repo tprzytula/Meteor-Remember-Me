@@ -1,6 +1,6 @@
 {
   "name": "rememberMe",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "Extension for Meteor account-base package with the implementation of rememberMe",
   "license": "MIT",
   "author": "Tomasz Przytuła <t.przytula.dev@gmail.com>",

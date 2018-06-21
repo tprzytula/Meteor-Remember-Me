@@ -1,7 +1,6 @@
-# Meteor - Remember Me 
+# Meteor - Remember Me
 [![Build Status](https://travis-ci.org/tprzytula/Meteor-Remember-Me.svg?branch=master)](https://travis-ci.org/tprzytula/Meteor-Remember-Me) [![Coverage Status](https://coveralls.io/repos/github/tprzytula/Meteor-Remember-Me/badge.svg)](https://coveralls.io/github/tprzytula/Meteor-Remember-Me)
-### Integrated remember me functionality support for Meteor
-
+##### RememberMe extension for the Meteor's accounts system
 
 As you already know meteor login system is based on login tokens.
 Each login token have it's own expiry time, until then it will stay active.
@@ -31,41 +30,28 @@ active for your phone!.
 
 ## Usage
 
-To activate the functionality:
-
-1. Import the package on server side:
+1. Import the package on the client side:
 
 ```js
 import RememberMe from 'meteor/tprzytula:remember-me';
 ```
 
-2. Activate the functionality:
-
-```js
-RememberMe.activate()
-```
-
-3. Import the package on client side:
-
-```js
-import RememberMe from 'meteor/tprzytula:remember-me';
-```
-
-4. Change your login method to this:
+2. Replace your login method with this:
 
 ```js
 RememberMe.loginWithPassword(username, password, (error) => {
     // Your previous logic
-}, true)
+}, false)
 ```
 
 If you don't need a callback then you can simply change it to:
 
 ```js
-RememberMe.loginWithPassword(username, password, true)
+RememberMe.loginWithPassword(username, password, false)
 ```
 
 ## API
+###### All methods are client side only
 
 `loginWithPassword(string: username, string: password, func: callback, boolean: rememberMe = true)`
 

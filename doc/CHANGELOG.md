@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.0] - 01.08.2018
+* Dependency was refactored
+
+**Important changes:**
+* All log ins made by the default Meteor.loginWithPassword method won't be affected anymore by this dependency. Every client who did not report the rememberMe setting will stay logged in to match the default Meteor's behaviour.
+
+**Breaking changes:**
+* `activate` method was removed. There is no need to activate RememberMe on the server anymore.
+* `changeAccountsSystem` will now throw an error when provided parameter is not a valid instance of the AccountsClient
+
 ## [0.2.1] - 10.05.2018
 * Change client methods to arrow functions to prevent wrong context issues ([Issue #6](https://github.com/tprzytula/Meteor-Remember-Me/issues/6))
 * loginWithPassword method for custom accounts was throwing an error if accounts were not stored in `Meteor.remoteUsers` (whoops!)
