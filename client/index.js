@@ -2,176 +2,61 @@ import {
     Accounts,
     AccountsClient
 } from 'meteor/accounts-base';
-
+import AccountsWrapper from './accountsWrapper';
 import {
     exportFlagFromParams,
     exportCallbackFromParams
-} from './helpers';
-
-import overrideAccountsLogin from './overrideLogin';
+} from './lib/methodParams';
 
 /**
- *  RememberMe
- *
- *  @property {Object} remoteConnection - handler to a custom connection.
- *  @property {string} methodName - unique name for the rememberMe method
- *
- *  @class
+ *  RememberMe client-side
+ *  Extends functionality of Meteor's Accounts system.
+ *  @property {AccountsWrapper} _accountsWrapper
  */
 class RememberMe {
     constructor() {
-        this.remoteConnection = null;
-        this.methodName = 'tprzytula:rememberMe-update';
-        overrideAccountsLogin(Accounts);
+        this._accountsWrapper = null;
+        this._init();
     }
 
     /**
-     *  Returns login method either from the main
-     *  connection or remote one if set.
-     *  @returns {function} loginWithPassword
+     *  Configures default Accounts system to be used.
      *  @private
      */
-    getLoginWithPasswordMethod = () => {
-        if (this.remoteConnection) {
-            return this.remoteConnection.loginWithPassword;
-        }
-
-        return Meteor.loginWithPassword;
-    };
+    _init() {
+        this._accountsWrapper = new AccountsWrapper(Accounts);
+        this._accountsWrapper.configure();
+    }
 
     /**
-     *  Returns call method either from the main
-     *  connection or remote one if set.
-     *  @returns {function} call
-     *  @private
-     */
-    getCallMethod = () => {
-        if (this.remoteConnection) {
-            return this.remoteConnection.call.bind(this.remoteConnection);
-        }
-
-        return Meteor.call;
-    };
-
-    /**
-     *  Wrapper for the Meteor.loginWithPassword
-     *  Invokes suitable loginMethod and upon results
-     *  passes it to the user's callback and if there
-     *  were no errors then also invokes a method to
-     *  update the rememberMe flag on the server side.
+     *  Login method.
+     *  To be used in the same way as "Meteor.loginWithPassword" except
+     *  of being able to pass the RememberMe flag as the last parameter.
+     *  @param params
      *  @public
      */
     loginWithPassword = (...params) => {
-        const [user, password, ...rest] = params;
+        const [username, password, ...rest] = params;
         const flag = exportFlagFromParams(rest);
-        const callbackMethod = exportCallbackFromParams(rest);
-        const loginMethod = this.getLoginWithPasswordMethod();
-        loginMethod(user, password, (error) => {
-            if (!error) {
-                this.updateFlag(flag);
-            }
-            callbackMethod(error);
-        });
+        const callback = exportCallbackFromParams(rest);
+        this._accountsWrapper.loginWithPassword({ username, password, flag, callback });
     };
 
     /**
-     *  Sends request to the server to update
-     *  the remember me setting.
-     *  @param {boolean} flag
-     *  @private
-     */
-    updateFlag = (flag) => {
-        const callMethod = this.getCallMethod();
-        callMethod(this.methodName, flag, (error) => {
-            if (error && error.error === 404) {
-                console.warn(
-                    'Dependency meteor/tprzytula:remember-me is not active!\n',
-                    '\nTo activate it make sure to run "RememberMe.activate()" on the server.' +
-                    'It is required to be able to access the functionality on the client.'
-                );
-            } else if (error) {
-                console.error(
-                    'meteor/tprzytula:remember-me' +
-                    '\nCould not update remember me setting.' +
-                    '\nError:',
-                    error
-                );
-            }
-        });
-    };
-
-    /**
-     *  Switches from using the current login system to
-     *  a new custom one. After switching each login attempt
-     *  will be performed to new accounts instance.
-     *  @param {AccountsClient} customAccounts
-     *  @returns {boolean} result
+     *  Gives the possibility to change the default Accounts system to a different one.
+     *  The new instance can use different DDP connection or even be on the same one.
+     *  Example of usage is given in the documentation.
      *  @public
      */
-    changeAccountsSystem = (customAccounts) => {
-        if (customAccounts instanceof AccountsClient &&
-            customAccounts.connection) {
-            this.remoteConnection = customAccounts.connection;
-            this.setLoginMethod(customAccounts);
-            overrideAccountsLogin(customAccounts);
-            return true;
+    changeAccountsSystem = (accountsInstance) => {
+        if (accountsInstance instanceof AccountsClient !== true) {
+            throw new Meteor.Error(400, 'Provided argument is not a valid instance of AccountsClient');
         }
-        console.error('meteor/tprzytula:remember-me' +
-            '\nProvided parameter is not a valid AccountsClient.');
-        return false;
-    };
-
-    /**
-     *  Since freshly created AccountsClients are not having
-     *  this method by default it's required to make sure that
-     *  the set accounts system will contain it.
-     *  @param {AccountsClient} accountsInstance
-     *  @private
-     */
-    setLoginMethod = (accountsInstance) => {
-        if ('loginWithPassword' in this.remoteConnection) {
-            // Login method is already present
-            return;
-        }
-
-        /* eslint-disable */
-        /* istanbul ignore next */
-        /*
-            The method is based on the original one in Accounts:
-            https://github.com/meteor/meteor/blob/46257bad264bf089e35e0fe35494b51fe5849c7b/packages/accounts-password/password_client.js#L33
-         */
-        this.remoteConnection.loginWithPassword = function (selector, password, callback) {
-            if (typeof selector === 'string') {
-                selector = selector.indexOf('@') === -1
-                    ? { username: selector }
-                    : { email: selector };
-            }
-            accountsInstance.callLoginMethod({
-                methodArguments: [{
-                    user: selector,
-                    password: Accounts._hashPassword(password)
-                }],
-                userCallback: function (error, result) {
-                    if (error && error.error === 400 &&
-                        error.reason === 'old password format') {
-                        srpUpgradePath({
-                            upgradeError: error,
-                            userSelector: selector,
-                            plaintextPassword: password
-                        }, callback);
-                    } else if (error) {
-                        callback && callback(error);
-                    } else {
-                        callback && callback();
-                    }
-                }
-            });
-        };
-        /* eslint-enable */
-    };
+        this._accountsWrapper = new AccountsWrapper(accountsInstance);
+        this._accountsWrapper.configure();
+    }
 }
 
-export default new RememberMe();
+export const factory = () => new RememberMe();
 
-// Export handle to the class only on TEST environment
-export const RememberMeClass = process.env.TEST_METADATA ? RememberMe : null;
+export default factory();

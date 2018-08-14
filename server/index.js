@@ -1,55 +1,74 @@
-import { Accounts } from 'meteor/accounts-base';
-import methods from './methods';
-import Authenticator from './authenticator';
-import RememberMeHelpers from './helpers';
+import { check } from 'meteor/check';
+import * as integrationMethod from './integration/method';
+import * as integrationAccounts from './integration/accounts';
+import * as integrationError from './integration/error';
+import * as ConnectionLastLoginToken from './lib/connectionLastLoginToken';
+import * as LoginAttemptValidator from './loginAttemptValidator';
 
 /**
- *  To have the access to this functionality it has to
- *  be activated on the server. We don't want to interfere
- *  with users who added the package but don't want to use
- *  this functionality in specific cases.
- *  @public
+ *  RememberMe server-side
+ *  Extends functionality of Meteor's Accounts system.
  */
-export const activate = () => {
-    methods();
-    Accounts.validateLoginAttempt((attempt) => {
-        const authenticator = new Authenticator(attempt);
-        const {
-            result,
-            resultCode,
-            reason,
-            error,
-        } = authenticator.validateAttempt();
+class RememberMe {
+    constructor() {
+        this._activate();
+    }
+
+    /**
+     *  Activates the functionality on the server
+     *  @private
+     */
+    _activate() {
+        this._createMethod();
+        integrationAccounts.addValidationStep(RememberMe._validateAttempt.bind(this));
+    }
+
+    /**
+     *  Creates Meteor method to listen for requests coming from users.
+     *  Users who will use the rememberMe functionality will pass the setting
+     *  using this method
+     *  @private
+     */
+    _createMethod() {
+        if (this._updateRememberMeMethod) return;
+        this._updateRememberMeMethod = integrationMethod.factory({
+            name: 'tprzytula:rememberMe-update',
+            callback: RememberMe._updateRememberMe.bind(this)
+        });
+        this._updateRememberMeMethod.setup();
+    }
+
+    /**
+     *  Updates the state of rememberMe setting for requesting connection.
+     *  @param {Object} connection
+     *  @param {boolean} rememberMe
+     *  @returns {boolean} result
+     *  @private
+     */
+    static _updateRememberMe({ connection }, rememberMe) {
+        check(rememberMe, Boolean);
+        const lastLoginToken = ConnectionLastLoginToken.factory(connection.id);
+        return lastLoginToken.updateFields({ rememberMe });
+    }
+
+    /**
+     *  Validated login attempt
+     *  @param {Object} attempt
+     *  @returns {boolean} result
+     *  @private
+     */
+    static _validateAttempt(attempt) {
+        const validator = LoginAttemptValidator.factory(attempt);
+        const { result, errorCode, reason, error } = validator.validate();
         if (error) {
             throw error;
         } else if (!result) {
-            throw new Meteor.Error(resultCode, reason);
+            throw integrationError.createMeteorError(errorCode, reason);
         }
         return true;
-    });
-};
-
-/**
- *  Updates the state of a rememberMe for the requested connectionId.
- *  @param {string} connectionId
- *  @param {boolean} flag
- *  @returns {boolean} result
- *  @private
- */
-export const updateState = (connectionId, flag) => {
-    const userLoginToken = Accounts._getLoginToken(connectionId);
-    const loginTokens = RememberMeHelpers.getAllUserTokens(userLoginToken);
-    if (!loginTokens) {
-        return false;
     }
+}
 
-    const updatedLoginTokens = loginTokens.map((loginToken) => {
-        const record = loginToken;
-        if (loginToken.hashedToken === userLoginToken) {
-            Object.assign(record, { rememberMe: flag });
-        }
-        return record;
-    });
+export const factory = () => new RememberMe();
 
-    return RememberMeHelpers.updateUserTokens(userLoginToken, updatedLoginTokens);
-};
+export default factory();
