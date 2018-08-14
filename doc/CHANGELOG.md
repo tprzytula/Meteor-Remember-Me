@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0] - 01.08.2018
+## [1.0.0] - 14.08.2018
 * Dependency was refactored
 
 **Important changes:**
