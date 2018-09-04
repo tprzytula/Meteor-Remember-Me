@@ -6,7 +6,11 @@ addons:
   chrome: stable
 before_install:
   - "curl -L https://raw.githubusercontent.com/arunoda/travis-ci-meteor-packages/dca8e51fafd60d9e5a8285b07ca34a63f22a5ed4/configure.sh | /bin/sh"
+  - npm install -g greenkeeper-lockfile
 before_script:
   - "export PATH=$HOME/.meteor:$PATH"
+  - greenkeeper-lockfile-update
+after_script:
+  - greenkeeper-lockfile-upload
 after_success:
   - npm run coveralls
