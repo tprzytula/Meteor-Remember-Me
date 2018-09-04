@@ -1,6 +1,5 @@
 {
   "extends": [
-    "airbnb-base",
     "plugin:meteor/recommended"
   ],
   "plugins": [
