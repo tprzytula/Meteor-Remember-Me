@@ -19,8 +19,9 @@
     "eslint": "eslint ./client ./server ./test || true",
     "eslint-check": "eslint ./client ./server ./test",
     "eslint-fix": "eslint ./client ./server ./test --fix || true",
-    "test": "cross-env TEST_BROWSER_DRIVER=chrome COVERAGE=1 COVERAGE_OUT_LCOVONLY=1 COVERAGE_OUT_HTML=1 COVERAGE_OUT_TEXT_SUMMARY=1 COVERAGE_APP_FOLDER=$PWD/ meteor test --once --driver-package meteortesting:mocha",
-    "test-watch": "cross-env WATCH=1 TEST_BROWSER_DRIVER=chrome meteor test --driver-package meteortesting:mocha",
+    "test": "npm run eslint-check && npm run test:headless",
+    "test:headless": "cross-env TEST_BROWSER_DRIVER=chrome COVERAGE=1 COVERAGE_OUT_LCOVONLY=1 COVERAGE_OUT_HTML=1 COVERAGE_OUT_TEXT_SUMMARY=1 COVERAGE_APP_FOLDER=$PWD/ meteor test --once --driver-package meteortesting:mocha",
+    "test:watch": "cross-env WATCH=1 TEST_BROWSER_DRIVER=chrome meteor test --driver-package meteortesting:mocha",
     "coveralls": "cat .coverage/lcov.info | coveralls"
   },
   "devDependencies": {
@@ -31,7 +32,6 @@
     "coveralls": "^3.0.1",
     "cross-env": "^5.1.4",
     "eslint": "^5.5.0",
-    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-import-resolver-meteor": "^0.4.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-meteor": "^5.1.0",
