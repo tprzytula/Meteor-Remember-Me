@@ -1,7 +1,6 @@
 # Meteor - Remember Me
 [![Build Status](https://travis-ci.org/tprzytula/Meteor-Remember-Me.svg?branch=master)](https://travis-ci.org/tprzytula/Meteor-Remember-Me) [![Coverage Status](https://coveralls.io/repos/github/tprzytula/Meteor-Remember-Me/badge.svg)](https://coveralls.io/github/tprzytula/Meteor-Remember-Me) [![Greenkeeper badge](https://badges.greenkeeper.io/tprzytula/Meteor-Remember-Me.svg)](https://greenkeeper.io/)
 ##### RememberMe extension for the Meteor's accounts system
-##### https://atmospherejs.com/tprzytula/remember-me
 As you already know meteor login system is based on login tokens.
 Each login token have it's own expiry time, until then it will stay active.
 As long as the time won't expire, the user will be automatically logged in.
@@ -20,6 +19,7 @@ Don't worry about using multiple devices for the same account! Each device will
 be respected separately and if you will log in on user "test" with rememberMe on
 your phone and then without rememberMe on your tablet then the autologin will stay
 active for your phone!.
+##### https://atmospherejs.com/tprzytula/remember-me
 
 ## Changelog
 [Meteor Remember-Me - Changelog](doc/CHANGELOG.md)
