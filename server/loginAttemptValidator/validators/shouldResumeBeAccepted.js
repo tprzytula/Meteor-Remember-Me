@@ -77,8 +77,8 @@ class ShouldResumeBeAccepted extends Validator.default {
      *  @private
      */
     _getUsersLoginTokens() {
-        const user = integrationAccounts.findUserByUsername(this.loginAttempt.user.username);
-        return (user.services && user.services.resume)
+        const user = integrationAccounts.findUser(this.loginAttempt.user);
+        return (user && user.services && user.services.resume)
             ? user.services.resume.loginTokens
             : [];
     }

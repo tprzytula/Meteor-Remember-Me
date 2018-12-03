@@ -12,7 +12,7 @@ describe('Given the shouldResumeBeAccepted validator', () => {
             .stub(integrationAccounts, 'hashLoginToken')
             .callsFake(token => token);
         sandbox
-            .stub(integrationAccounts, 'findUserByUsername')
+            .stub(integrationAccounts, 'findUser')
             .callsFake(() => ({
                 services: {
                     resume: {

@@ -22,6 +22,30 @@ export const getConnectionLastLoginToken = connectionId => Accounts._getLoginTok
 export const findUserByUsername = username => Accounts.findUserByUsername(username);
 
 /**
+ *  Returns user's record matching the email.
+ *  @param {string} email.
+ *  @returns {Object} user
+ */
+export const findUserByEmail = email => Accounts.findUserByEmail(email);
+
+/**
+ *  Finds user's record matching provided user details.
+ *  @param {string} [username]
+ *  @param {[Object]} [emails]
+ *  @returns {Object || undefined} result
+ */
+export const findUser = user = ({ username, emails = [] } = {}) => {
+    if (username) {
+        return findUserByUsername(username);
+    }
+
+    const [ primaryEmail ] = emails;
+    if (primaryEmail && primaryEmail.address) {
+        return findUserByEmail(primaryEmail.address);
+    }
+};
+
+/**
  *  Hashes login token.
  *  @param {string} token
  *  @returns {string} hashedToken
