@@ -8,6 +8,8 @@ addons:
 before_install:
   - "curl -L https://raw.githubusercontent.com/arunoda/travis-ci-meteor-packages/dca8e51fafd60d9e5a8285b07ca34a63f22a5ed4/configure.sh | /bin/sh"
   - npm install -g greenkeeper-lockfile
+  - if [[ `npm -v` != 6* ]]; then npm install -g npm@6; fi
+    install: case $TRAVIS_BRANCH in greenkeeper*) npm i;; *) npm ci;; esac;
 before_script:
   - "export PATH=$HOME/.meteor:$PATH"
   - greenkeeper-lockfile-update
