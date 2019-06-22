@@ -31,7 +31,7 @@
     "chromedriver": "^73.0.0",
     "coveralls": "^3.0.1",
     "cross-env": "^5.1.4",
-    "eslint": "^5.5.0",
+    "eslint": "^6.0.0",
     "eslint-import-resolver-meteor": "^0.4.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-meteor": "^5.1.0",
