@@ -25,9 +25,7 @@ class Validator {
      *  Runs the validation.
      *  @returns {boolean} isValid
      */
-    validate() {
-        return !!this.loginAttempt;
-    }
+    validate() {}
 
     /**
      *  Returns error message for failure.

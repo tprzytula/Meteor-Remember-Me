@@ -1,5 +1,5 @@
 {
-  "name": "rememberMe",
+  "name": "rememberme",
   "version": "1.0.1",
   "description": "Extension for Meteor account-base package with the implementation of rememberMe",
   "license": "MIT",
@@ -20,21 +20,23 @@
     "eslint-check": "eslint ./client ./server ./test",
     "eslint-fix": "eslint ./client ./server ./test --fix || true",
     "test": "npm run eslint-check && npm run test:headless",
-    "test:headless": "cross-env TEST_BROWSER_DRIVER=chrome COVERAGE=1 COVERAGE_OUT_LCOVONLY=1 COVERAGE_OUT_HTML=1 COVERAGE_OUT_TEXT_SUMMARY=1 COVERAGE_APP_FOLDER=$PWD/ meteor test --once --driver-package meteortesting:mocha",
-    "test:watch": "cross-env WATCH=1 TEST_BROWSER_DRIVER=chrome meteor test --driver-package meteortesting:mocha",
+    "test:headless": "cross-env BABEL_ENV=COVERAGE TEST_BROWSER_DRIVER=chrome COVERAGE=1 COVERAGE_OUT_LCOVONLY=1 COVERAGE_OUT_HTML=1 COVERAGE_OUT_TEXT_SUMMARY=1 COVERAGE_APP_FOLDER=$PWD/ meteor test --once --driver-package meteortesting:mocha",
+    "test:watch": "cross-env WATCH=1 BABEL_ENV=COVERAGE TEST_BROWSER_DRIVER=chrome meteor test --driver-package meteortesting:mocha",
     "coveralls": "cat .coverage/lcov.info | coveralls"
   },
   "devDependencies": {
     "@babel/runtime": "^7.5.4",
     "babel-eslint": "^10.0.2",
+    "babel-plugin-istanbul": "^5.2.0",
     "bcrypt": "^3.0.6",
-    "chromedriver": "2.46.0",
+    "chromedriver": "78.0.1",
     "coveralls": "^3.0.4",
     "cross-env": "^5.2.0",
     "eslint": "^6.0.1",
     "eslint-import-resolver-meteor": "^0.4.0",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-meteor": "^6.0.0",
+    "meteor-node-stubs": "^0.4.1",
     "pre-commit": "^1.2.2",
     "pre-push": "^0.1.1",
     "selenium-webdriver": "3.6.0",
@@ -42,11 +44,18 @@
     "ultimate-chai": "^4.1.1"
   },
   "pre-commit": [
-    "eslint-check",
     "test"
   ],
   "pre-push": [
-    "eslint-check",
     "test"
-  ]
+  ],
+  "babel": {
+    "env": {
+      "COVERAGE": {
+        "plugins": [
+          "istanbul"
+        ]
+      }
+    }
+  }
 }
