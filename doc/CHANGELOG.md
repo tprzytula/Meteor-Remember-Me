@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.2] - 29.10.2019
+* Improved clarity of how to use the loginWithPassword (#38)
+* Test coverage is now correctly gathered from both client & server
+
 ## [1.0.1] - 03.12.2018
 * Add support to accounts that are identified by email (fixes #16)
 
