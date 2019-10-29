@@ -36,10 +36,10 @@ class RememberMe {
      *  @public
      */
     loginWithPassword = (...params) => {
-        const [username, password, ...rest] = params;
+        const [selector, password, ...rest] = params;
         const flag = exportFlagFromParams(rest);
         const callback = exportCallbackFromParams(rest);
-        this._accountsWrapper.loginWithPassword({ username, password, flag, callback });
+        this._accountsWrapper.loginWithPassword({ selector, password, flag, callback });
     };
 
     /**

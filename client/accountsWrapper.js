@@ -23,14 +23,16 @@ class AccountsWrapper {
 
     /**
      *  Wraps login method from the accounts instance.
-     *  @param {string} username
+     *  @param {string | Object} selector - Either a string interpreted as a username or an email; or an object with a
+     *                                      single key: `email`, `username` or `id`. Username or email match in a case
+     *                                      insensitive manner.
      *  @param {string} password
      *  @param {boolean} flag
      *  @param {function} callback
      *  @public
      */
-    loginWithPassword({ username, password, flag, callback }) {
-        this._accounts.loginWithPassword(username, password, (error) => {
+    loginWithPassword({ selector, password, flag, callback }) {
+        this._accounts.loginWithPassword(selector, password, (error) => {
             if (!error) {
                 this._updateFlag(flag);
             }

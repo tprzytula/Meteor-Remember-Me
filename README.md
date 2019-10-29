@@ -39,7 +39,7 @@ import RememberMe from 'meteor/tprzytula:remember-me';
 2. Replace your login method with this:
 
 ```js
-RememberMe.loginWithPassword(username, password, (error) => {
+RememberMe.loginWithPassword(user, password, (error) => {
     // Your previous logic
 }, false)
 ```
@@ -47,17 +47,19 @@ RememberMe.loginWithPassword(username, password, (error) => {
 If you don't need a callback then you can simply change it to:
 
 ```js
-RememberMe.loginWithPassword(username, password, false)
+RememberMe.loginWithPassword(user, password, false)
 ```
 
 ## API
 ###### All methods are client side only
 
-`loginWithPassword(string: username, string: password, func: callback, boolean: rememberMe = true)`
+`loginWithPassword(string | Object: user, string: password, func: callback, boolean: rememberMe = true)`
 
 Wrapper for a Meteor.loginWithPassword with an addition of rememberMe as a last parameter.
 
 The default for rememberMe is true to match the behaviour of Meteor.
+
+Refer to the [Meteor's documentation](https://docs.meteor.com/api/accounts.html#Meteor-loginWithPassword) for more information.
 
 `changeAccountsSystem(AccountsClient: customAccounts)`
 

@@ -10,7 +10,7 @@ import * as Alerts from './../../client/lib/alerts';
 describe('Given AccountsWrapper', () => {
     const sandbox = sinon.createSandbox();
     const sampleCorrectParams = {
-        username: 'test-user',
+        selector: 'test-user',
         password: 'test-password',
         flag: true,
         callback: sandbox.stub()
@@ -22,8 +22,8 @@ describe('Given AccountsWrapper', () => {
         connection = DDP.connect('localhost:3000');
         accountsClient = new AccountsClient({ connection });
         accountsClient.loginWithPassword = sandbox.stub().callsFake((...params) => {
-            const [username, password, callback] = params;
-            const attemptValid = username === sampleCorrectParams.username &&
+            const [selector, password, callback] = params;
+            const attemptValid = selector === sampleCorrectParams.selector &&
                 password === sampleCorrectParams.password;
             if (attemptValid) {
                 callback();
@@ -61,9 +61,9 @@ describe('Given AccountsWrapper', () => {
             });
 
             it('should call loginWithPassword from the accounts instance with correct parameters', () => {
-                const { username, password } = sampleCorrectParams;
+                const { selector, password } = sampleCorrectParams;
                 expect(accountsClient.loginWithPassword)
-                    .to.be.calledWith(username, password);
+                    .to.be.calledWith(selector, password);
             });
 
             it('should call callback without any error', () => {
@@ -77,7 +77,7 @@ describe('Given AccountsWrapper', () => {
 
         describe('And loginWithPassword with incorrect login details', () => {
             const sampleIncorrectParams = {
-                username: 'test-user-wrong',
+                selector: 'test-user-wrong',
                 password: 'test-password-wrong',
                 flag: true,
                 callback: sinon.stub()
