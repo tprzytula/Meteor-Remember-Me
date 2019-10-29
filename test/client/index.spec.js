@@ -7,7 +7,7 @@ import * as RememberMe from './../../client/index';
 describe('Given RememberMe', () => {
     const sandbox = sinon.createSandbox();
     const sampleCorrectParams = {
-        username: 'test-user',
+        selector: 'test-user',
         password: 'test-password',
         flag: true,
         callback: sandbox.stub()
@@ -31,8 +31,8 @@ describe('Given RememberMe', () => {
         });
 
         it('should call loginWithPassword with correct arguments', () => {
-            const { username, password } = sampleCorrectParams;
-            expect(loginWithPasswordStub).to.be.calledWith(username, password);
+            const { selector, password } = sampleCorrectParams;
+            expect(loginWithPasswordStub).to.be.calledWith(selector, password);
         });
     });
 
@@ -79,7 +79,7 @@ describe('Given RememberMe', () => {
 
         beforeEach(() => {
             parameters = {
-                username: 'test-user',
+                selector: 'test-user',
                 password: 'test-password'
             };
             callStub = sandbox.stub(Accounts.connection, 'call')
@@ -87,7 +87,7 @@ describe('Given RememberMe', () => {
                     callback();
                 });
             sandbox.stub(Accounts, 'loginWithPassword')
-                .callsFake((username, password, callback) => {
+                .callsFake((selector, password, callback) => {
                     callback();
                 });
         });
