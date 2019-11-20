@@ -25,7 +25,7 @@
     "coveralls": "cat .coverage/lcov.info | coveralls"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.6.3",
+    "@babel/runtime": "^7.7.2",
     "babel-eslint": "^10.0.3",
     "babel-plugin-istanbul": "^5.2.0",
     "bcrypt": "^3.0.6",
