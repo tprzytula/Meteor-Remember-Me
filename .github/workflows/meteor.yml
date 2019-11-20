@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         meteor: [ '1.8.2' ]
-    name: Meteor ${{ matrix.meteor }} sample
+    name: Testing with Meteor ${{ matrix.meteor }}
     steps:
       - uses: actions/checkout@v1
       - name: Setup meteor
@@ -17,3 +17,8 @@ jobs:
           meteor-release: ${{ matrix.meteor }}
       - run: meteor npm install
       - run: meteor npm test
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./.coverage/lcov.info
