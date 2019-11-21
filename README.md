@@ -67,4 +67,8 @@ Gives the possibility to set a custom accounts instance to be used for the login
 
 ## Testing
 
-You can test this dependency by running `npm run test` or check the recent results from circleci & travis-ci
+You can test this dependency by running `npm run test:headless` or by checking the results of a GitHub Action pipeline from the last commit.
+
+As you might notice I'm using `meteor test` instead of `meteor test-packages`.
+
+You can find more about why was I forced to create such a hack [here](package.js). Hopefully this will be helpful for you if you ran through similar issues.
