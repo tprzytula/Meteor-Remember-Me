@@ -54,7 +54,7 @@ Refer to the [Meteor's documentation](https://docs.meteor.com/api/accounts.html#
 
 Gives the possibility to set a custom accounts instance to be used for the login system ([more details](doc/CUSTOM_ACCOUNTS.md))
 
-## Important details
+## Important notice
 
 Many people were trying to solve this problem in the past by storing the setting in local storage and singing out the user or clearing their cached token when they come back. However, this approach might cause many side effects, especially when your business logic uses `onLogin` callbacks because the user will still be logged-in for a split of a second before their logic could take effect. 
 
@@ -65,7 +65,7 @@ You won't be having these problems when using this package.
 - Not a single `onLogin` callback will be invoked when your users are coming back to the website after logging-in with `rememberMe` being `false`.
 - The `rememberMe` setting is stored only in the MongoDB when you leave the website. There will be no information regarding this setting stored in local storage, IndexedDB etc.
 - The `rememberMe` setting is unique not only to the user but also to the login token itself which means that each device will be respected separately. Logging-in on user "test" with rememberMe on your phone and then without rememberMe on your desktop won't stop you from being logged-in automatically the next time you visit the website on your phone.
-
+- Despite the choice you won't be suddenly logged-out when you reconnect after losing connection during the same session.
 
 ## Testing
 
