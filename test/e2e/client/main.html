@@ -1,5 +1,5 @@
 <head>
-  <title>Binding issue - reproduction attempt</title>
+  <title>Meteor - RememberMe - e2e</title>
 </head>
 
 <body>
@@ -16,9 +16,9 @@
 </body>
 
 <template name="loginSystem">
-    <button>{{buttonState}}</button>
+    <button data-cy="login-button">{{buttonState}}</button>
     {{#unless currentUser}}
-        <input type="checkbox" checked={{rememberMe}}>Remember me
+        <input type="checkbox" checked={{rememberMe}} data-cy="remember-me-checkbox">Remember me
     {{/unless}}
 </template>
 

@@ -1,12 +1,19 @@
 {
-  "name": "test",
+  "name": "e2e",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "test": "start-server-and-test start http://localhost:3000 cypress:headless",
+    "cypress:headless": "npx cypress run",
+    "cypress:open": "npx cypress open"
   },
   "dependencies": {
     "@babel/runtime": "^7.7.4",
     "bcrypt": "^3.0.7",
     "meteor-node-stubs": "^0.3.2"
+  },
+  "devDependencies": {
+    "cypress": "^3.6.1",
+    "start-server-and-test": "^1.10.6"
   }
 }
