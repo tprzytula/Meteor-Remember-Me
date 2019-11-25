@@ -1,6 +1,7 @@
 # IDE
 .idea
 .vscode
+.DS_Store
 
 # Git
 .git

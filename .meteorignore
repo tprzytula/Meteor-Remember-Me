@@ -1,2 +1,3 @@
 package.js
 .coverage
+test/e2e

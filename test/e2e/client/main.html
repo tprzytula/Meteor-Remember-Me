@@ -1,0 +1,30 @@
+<head>
+  <title>Binding issue - reproduction attempt</title>
+</head>
+
+<body>
+    {{#if currentUser}}
+        <h1>You are logged in as user "{{currentUser.username}}"</h1>
+        <h3>Press the button to log out.</h3>
+    {{else}}
+        <h1>You are not logged in</h1>
+        <h3>Press the button to log in.</h3>
+    {{/if}}
+
+    {{> loginSystem}}
+    {{> loginResultTemplate}}
+</body>
+
+<template name="loginSystem">
+    <button>{{buttonState}}</button>
+    {{#unless currentUser}}
+        <input type="checkbox" checked={{rememberMe}}>Remember me
+    {{/unless}}
+</template>
+
+<template name="loginResultTemplate">
+    {{#if loginResult}}
+        <br/><br/><br/>
+        <b>Last login result:</b> {{loginResult}}
+    {{/if}}
+</template>
