@@ -69,7 +69,7 @@ You won't be having these problems when using this package.
 
 ## Testing
 
-You can test this dependency by running `npm run test:headless` or by checking the results of a GitHub Action pipeline from the last commit.
+You can test this dependency by running `npm run test:headless` to perform unit tests or `npm run test:e2e` for Cypress tests instead. You can also check the results of a GitHub Action pipeline from the last commit.
 
 As you might notice I'm using `meteor test` instead of `meteor test-packages`.
 

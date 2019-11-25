@@ -22,6 +22,7 @@
     "test": "npm run eslint-check && npm run test:headless",
     "test:headless": "cross-env BABEL_ENV=COVERAGE TEST_BROWSER_DRIVER=chrome COVERAGE=1 COVERAGE_OUT_LCOVONLY=1 COVERAGE_OUT_HTML=1 COVERAGE_OUT_TEXT_SUMMARY=1 COVERAGE_APP_FOLDER=$PWD/ meteor test --once --driver-package meteortesting:mocha",
     "test:watch": "cross-env WATCH=1 BABEL_ENV=COVERAGE TEST_BROWSER_DRIVER=chrome meteor test --driver-package meteortesting:mocha",
+    "test:e2e": "cd test/e2e && meteor npm install && meteor npm test",
     "coveralls": "cat .coverage/lcov.info | coveralls"
   },
   "devDependencies": {
