@@ -29,7 +29,7 @@
     "@babel/runtime": "^7.7.2",
     "babel-eslint": "^10.0.3",
     "babel-plugin-istanbul": "^5.2.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "chromedriver": "78.0.1",
     "coveralls": "^3.0.7",
     "cross-env": "^5.2.1",
