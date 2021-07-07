@@ -1,3 +1,9 @@
+// Run tests from other files
+import './accountsConfigurator.spec';
+import './accountsWrapper.spec';
+import './lib/alerts.spec';
+import './lib/methodParams.spec';
+
 import { expect } from 'ultimate-chai';
 import sinon from 'sinon';
 import { DDP } from 'meteor/ddp-client';

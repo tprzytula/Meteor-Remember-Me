@@ -6,7 +6,7 @@ Package.describe({
     documentation: 'README.md'
 });
 
-Package.onUse((api) => {
+Package.onUse(function (api) {
     api.versionsFrom('1.5.2.2');
     api.use('ecmascript');
     api.use('accounts-base');
@@ -15,19 +15,11 @@ Package.onUse((api) => {
     api.mainModule('server/index.js', 'server');
 });
 
-/*
-    https://github.com/meteortesting/meteor-mocha/issues/63
+Package.onTest(function (api) {
+    api.use(['meteortesting:browser-tests', 'meteortesting:mocha']);
+    api.use(['ecmascript', 'accounts-base', 'accounts-password']);
+    api.use('tprzytula:remember-me');
 
-    Unfortunately, because of the issue above I was not able to test this package using the "meteor test-packages"
-    and had to setup a "fake" meteor project instead.
-
-    You can follow my approach if you have encountered the same issues. Make sure to setup a Meteor project within
-    your package and end up with a ".meteor" directory where your dependency should be listed in the packages list.
-
-    Things to remember:
-        - Make sure to always have the recent version of your package under .meteor/packages
-        - When you want to publish your package by running "Meteor publish" you need to remove the ".meteor" directory
-          before because otherwise it won't allow you to do that (I know it's a pain)
-
-    Hopefully one day Meteor won't require from us to use hacks for such basic things as testing your own code.
-*/
+    api.mainModule('test/client/index.spec.js', 'client');
+    api.mainModule('test/server/index.spec.js', 'server');
+});
